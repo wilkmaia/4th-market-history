@@ -63,6 +63,12 @@ export default class Ragna4thDatabase {
     })))
   }
 
+  public setLastTransactionID(id: number) {
+    if (id > this._lastKnownTransactionID) {
+      this._lastKnownTransactionID = id
+    }
+  }
+
   public async getLastTransactions(): Promise<Transaction[]> {
     try {
       const res = await fetch(`${this._transactionsApiUrl}/discord/transactions/last`)

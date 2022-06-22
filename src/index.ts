@@ -52,6 +52,12 @@ const mainLoop = async (session: Session) => {
 const run = async () => {
   const session = db.driver.session()
 
+  const res = await session.run('MATCH (t:Transaction) RETURN t.id as id ORDER BY t.id DESC LIMIT 1')
+  const lastKnownTransactionID = res.records[0].get('id') ?? 0
+  console.debug(`Initializing runner with lastKnownTransactionID = ${lastKnownTransactionID}`)
+
+  await client.setLastTransactionID(lastKnownTransactionID)
+
   await mainLoop(session)
 
   await session.close()
