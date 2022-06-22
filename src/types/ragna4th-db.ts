@@ -40,10 +40,7 @@ export type ItemOption = {
 
 export type Item = {
   id: number
-  time: Date
   name: string
-  amount: number
-  price: number
   refine: number
   cards: number[]
   options: ItemOption[]
@@ -56,4 +53,7 @@ export type Item = {
 export type Transaction = {
   id: number
   item: Item
+  time: number
+  count: number
+  unitPrice: number
 }
